@@ -1,7 +1,7 @@
-import {ConfigModule} from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import baseConfig from './base-config';
-import { Institution,Category,City,Objects,Sector } from '../entities';
+import { Institution, Category, City, Objects, Sector, CategorySector, Booking } from '../entities';
 ConfigModule.forRoot({
     isGlobal: true,
     load: [baseConfig],
@@ -10,11 +10,11 @@ ConfigModule.forRoot({
 export const DataSourceConfig: DataSourceOptions = {
     type: process.env.TYPEORM_CONNECTION as any,
     host: process.env.DATABASE_HOST,
-    port: parseInt(process.env.TYPEORM_PORT,10),
-    username : process.env.TYPEORM_USERNAME,
-    password : process.env.TYPEORM_PASSWORD,
-    database : process.env.TYPEORM_DATABASE,
-    entities: [Institution,Category,City,Objects,Sector],
+    port: parseInt(process.env.TYPEORM_PORT, 10),
+    username: process.env.TYPEORM_USERNAME,
+    password: process.env.TYPEORM_PASSWORD,
+    database: process.env.TYPEORM_DATABASE,
+    entities: [Institution, Category, City, Objects, Sector, CategorySector, Booking],
     synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
     logging: process.env.TYPEORM_LOGGING === 'true',
     migrations: [__dirname + '/../migrations/*{.ts,.js}'],

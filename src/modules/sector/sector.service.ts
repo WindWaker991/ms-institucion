@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSectorDto } from './dto/create-sector.dto';
 import { UpdateSectorDto } from './dto/update-sector.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Sector } from 'src/entities';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SectorService {
-  create(createSectorDto: CreateSectorDto) {
-    return 'This action adds a new sector';
+  constructor(
+    @InjectRepository(Sector) private sectorRepository: Repository<Sector>,
+  ) { }
+
+  async create(createSectorDto: CreateSectorDto) {
+    const sector = this.sectorRepository.create(createSectorDto);
+    return await this.sectorRepository.save(sector);
   }
 
-  findAll() {
-    return `This action returns all sector`;
+  async findAll() {
+    return await this.sectorRepository.find({ relations: ['objects'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sector`;
+  async findOne(id: string) {
+    return await this.sectorRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateSectorDto: UpdateSectorDto) {
-    return `This action updates a #${id} sector`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} sector`;
-  }
 }

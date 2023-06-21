@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-    name: 'category'
+    name: 'categorySector'
 })
-export class Category {
+export class CategorySector {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -11,6 +11,6 @@ export class Category {
     name: string;
 
     @Column()
-    description: string;
+    cant: number;
 
 }

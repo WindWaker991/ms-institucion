@@ -1,1 +1,5 @@
-export class CreateObjectDto {}
+export class CreateObjectDto {
+    number: string;
+    categoryId: string;
+    sectorId: string;
+}

@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne } from 'typeorm';
 import { City } from './city.entity';
 import { Sector } from './sector.entity';
 @Entity({
@@ -14,7 +14,7 @@ export class Institution {
     @ManyToOne(() => City)
     city: City;
 
-    @OneToMany(() => Sector, sector=> sector.institution)
+    @OneToMany(() => Sector, sector => sector.institution)
     sectors: Sector[];
 
 

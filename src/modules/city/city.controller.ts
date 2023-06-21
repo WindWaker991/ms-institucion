@@ -25,8 +25,8 @@ export class CityController {
     return this.cityService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Post('getOne')
+  findOne(@Body('id') id: string) {
     return this.cityService.findOne(id);
   }
 }
