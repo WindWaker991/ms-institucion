@@ -8,6 +8,8 @@ import { CategoryModule } from './modules/category/category.module';
 import { ObjectModule } from './modules/object/object.module';
 import { SectorModule } from './modules/sector/sector.module';
 import { InstitutionModule } from './modules/institution/institution.module';
+import { BookingModule } from './modules/booking/booking.module';
+
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { InstitutionModule } from './modules/institution/institution.module';
     ObjectModule,
     SectorModule,
     InstitutionModule,
+    BookingModule,
+
   ],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

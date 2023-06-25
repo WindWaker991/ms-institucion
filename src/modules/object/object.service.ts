@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateObjectDto } from './dto/create-object.dto';
 import { UpdateObjectDto } from './dto/update-object.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Objects } from '../../entities';
+import { CategoryService } from '../category/category.service';
+import { SectorService } from '../sector/sector.service';
 
 @Injectable()
 export class ObjectService {
-  create(createObjectDto: CreateObjectDto) {
-    return 'This action adds a new object';
+  constructor(
+    @InjectRepository(Objects) private objectRepository: Repository<Objects>,
+    private categoryService: CategoryService,
+    private SectorService: SectorService,
+  ) { }
+
+  async create(createObjectDto: CreateObjectDto) {
+    const { number, categoryId, sectorId } = createObjectDto;
+    const object = this.objectRepository.create({ number });
+    const category = await this.categoryService.findOne(categoryId);
+    const sector = await this.SectorService.findOne(sectorId);
+    object.category = category;
+    object.sector = sector;
+    return await this.objectRepository.save(object);
   }
 
-  findAll() {
-    return `This action returns all object`;
+  async findAll() {
+    return await this.objectRepository.find({ relations: ['category', 'sector'] });
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} object`;
   }
 
-  update(id: number, updateObjectDto: UpdateObjectDto) {
-    return `This action updates a #${id} object`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} object`;
-  }
 }

@@ -1,6 +1,7 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Institution } from './institution.entity';
-import {Objects} from './object.entity';
+import { Objects } from './object.entity';
+import { CategorySector } from './categorySector';
 
 @Entity({
     name: 'sector'
@@ -12,10 +13,10 @@ export class Sector {
     @Column()
     name: string;
 
-    @ManyToOne(()=> Institution, institution => institution.sectors)
+    @ManyToOne(() => Institution, institution => institution.sectors)
     institution: Institution;
 
-    @OneToMany(()=> Objects, object => object)
+    @OneToMany(() => Objects, object => object.sector)
     objects: Objects[];
 
 }
