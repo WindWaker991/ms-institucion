@@ -7,28 +7,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class CategoryService {
-
   constructor(
-    @InjectRepository(Category) private categoryRepository: Repository<Category>,
-  ) { }
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
+  ) {}
 
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  async create(createCategoryDto: CreateCategoryDto) {
+    const category = this.categoryRepository.create(createCategoryDto);
+    return await this.categoryRepository.save(category);
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll() {
+    return await this.categoryRepository.find();
   }
 
   async findOne(id: string) {
     return await this.categoryRepository.findOne({ where: { id } });
-  }
-
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} category`;
   }
 }

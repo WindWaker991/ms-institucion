@@ -1,21 +1,26 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 import { City } from './city.entity';
 import { Sector } from './sector.entity';
 @Entity({
-    name: 'institution'
+  name: 'institution',
 })
 export class Institution {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @ManyToOne(() => City)
-    city: City;
+  @ManyToOne(() => City, (city) => city.institutions)
+  city: City;
 
-    @OneToMany(() => Sector, sector => sector.institution)
-    sectors: Sector[];
-
-
+  @OneToMany(() => Sector, (sector) => sector.institution)
+  sectors: Sector[];
 }

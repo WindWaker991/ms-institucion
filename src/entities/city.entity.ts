@@ -1,21 +1,16 @@
-import {Entity,Column, PrimaryGeneratedColumn, OneToMany, In} from 'typeorm';
-
-
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, In } from 'typeorm';
+import { Institution } from './institution.entity';
 
 @Entity({
-    name: 'city'
+  name: 'city',
 })
 export class City {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @OneToMany(() => City, city=> city.id)
-    cities: City[];
-
-
-
-
+  @OneToMany(() => Institution, (institution) => institution.city)
+  institutions: Institution[];
 }

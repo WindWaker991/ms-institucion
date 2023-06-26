@@ -1,22 +1,27 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, OneToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { Institution } from './institution.entity';
 import { Objects } from './object.entity';
-import { CategorySector } from './categorySector';
 
 @Entity({
-    name: 'sector'
+  name: 'sector',
 })
 export class Sector {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @ManyToOne(() => Institution, institution => institution.sectors)
-    institution: Institution;
+  @ManyToOne(() => Institution, (institution) => institution.sectors)
+  institution: Institution;
 
-    @OneToMany(() => Objects, object => object.sector)
-    objects: Objects[];
-
+  @OneToMany(() => Objects, (object) => object.sector)
+  objects: Objects[];
 }

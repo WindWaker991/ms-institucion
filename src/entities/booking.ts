@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Objects } from './object.entity';
 
 @Entity({
@@ -12,11 +18,9 @@ export class Booking {
   date: Date;
 
   @Column()
-  schedule: string;
-
-  @Column()
   userId: string;
 
   @OneToOne(() => Objects, (object) => object)
-  objectId: Objects;
+  @JoinColumn()
+  object: Objects;
 }
