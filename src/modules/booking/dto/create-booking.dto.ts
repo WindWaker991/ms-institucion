@@ -1,7 +1,12 @@
+import { Objects } from 'src/entities';
+
 export class CreateBookingDto {
-    date: Date;
-    startTime: Date;
-    endTime: Date;
-    userId: string;
-    objectId: string;
+  create: CreateDTO;
+  objectId: string;
+}
+
+class CreateDTO {
+  date: Date;
+  schedule: string;
+  userId: string;
 }

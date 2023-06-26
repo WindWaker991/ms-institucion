@@ -4,15 +4,22 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Booking } from 'src/entities';
+import { ObjectService } from '../object/object.service';
 @Injectable()
 export class BookingService {
   constructor(
-    @InjectRepository(Booking) private bookingRepository:
-      Repository<Booking>,
-  ) { }
+    @InjectRepository(Booking) private bookingRepository: Repository<Booking>,
+    private objectService: ObjectService,
+  ) {}
 
   async create(createBookingDto: CreateBookingDto) {
-    const booking = this.bookingRepository.create(createBookingDto)
+    const { objectId, create } = createBookingDto;
+    const object = await this.objectService.findOne(objectId);
+    const createBooking = {
+      ...create,
+      objectId: object,
+    };
+    const booking = this.bookingRepository.create(createBooking);
     return await this.bookingRepository.save(booking);
   }
 
@@ -23,9 +30,9 @@ export class BookingService {
   async findOne(id: string) {
     return await this.bookingRepository.findOne({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
 
   update(id: number, updateBookingDto: UpdateBookingDto) {
@@ -34,7 +41,7 @@ export class BookingService {
 
   async remove(id: string) {
     return await this.bookingRepository.delete({
-      id
+      id,
     });
   }
 }

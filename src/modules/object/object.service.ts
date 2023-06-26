@@ -13,7 +13,7 @@ export class ObjectService {
     @InjectRepository(Objects) private objectRepository: Repository<Objects>,
     private categoryService: CategoryService,
     private SectorService: SectorService,
-  ) { }
+  ) {}
 
   async create(createObjectDto: CreateObjectDto) {
     const { number, categoryId, sectorId } = createObjectDto;
@@ -26,11 +26,12 @@ export class ObjectService {
   }
 
   async findAll() {
-    return await this.objectRepository.find({ relations: ['category', 'sector'] });
+    return await this.objectRepository.find({
+      relations: ['category', 'sector'],
+    });
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} object`;
+    return this.objectRepository.findOne({ where: { id } });
   }
-
 }
