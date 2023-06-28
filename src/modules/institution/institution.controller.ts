@@ -18,8 +18,8 @@ export class InstitutionController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.institutionService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return await this.institutionService.findOne(id);
   }
 
 

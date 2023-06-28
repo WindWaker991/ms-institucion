@@ -12,7 +12,7 @@ export class SectorService {
   constructor(
     @InjectRepository(Sector) private sectorRepository: Repository<Sector>,
     private institutionService: InstitutionService,
-  ) {}
+  ) { }
 
   async create(createSectorDto: CreateSectorDto) {
     const { institutionId } = createSectorDto;
@@ -23,6 +23,7 @@ export class SectorService {
   }
 
   async findAll() {
+
     return await this.sectorRepository.find({ relations: ['objects'] });
   }
 

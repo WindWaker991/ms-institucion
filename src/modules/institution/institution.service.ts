@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateInstitutionDto } from './dto/create-institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Institution } from 'src/entities';
+import { Institution, Sector } from 'src/entities';
 import { Repository } from 'typeorm';
 import { CityService } from '../city/city.service';
 
@@ -12,7 +12,7 @@ export class InstitutionService {
     @InjectRepository(Institution)
     private institutionRepository: Repository<Institution>,
     private cityService: CityService,
-  ) {}
+  ) { }
 
   async create(createInstitutionDto: CreateInstitutionDto) {
     const { cityid } = createInstitutionDto;
@@ -29,6 +29,6 @@ export class InstitutionService {
   }
 
   async findOne(id: string) {
-    return await this.institutionRepository.findOne({ where: { id } });
+    return await this.institutionRepository.findOne({ where: { id }, relations: ['sectors', 'sectors.objects'] });
   }
 }

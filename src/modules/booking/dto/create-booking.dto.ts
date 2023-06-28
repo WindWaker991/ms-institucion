@@ -7,6 +7,5 @@ export class CreateBookingDto {
 
 class CreateDTO {
   date: Date;
-  schedule: string;
   userId: string;
 }
