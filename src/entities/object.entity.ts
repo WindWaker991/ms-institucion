@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Category } from './category.entity';
 import { Sector } from './sector.entity';
@@ -19,6 +20,7 @@ export class Objects {
   number: string;
 
   @OneToOne(() => Category)
+  @JoinColumn()
   category: Category;
 
   @ManyToOne(() => Sector, (sector) => sector.objects)

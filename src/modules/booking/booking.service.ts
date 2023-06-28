@@ -17,7 +17,7 @@ export class BookingService {
     const object = await this.objectService.findOne(objectId);
     const createBooking = {
       ...create,
-      objectId: object,
+      object: object,
     };
     const booking = this.bookingRepository.create(createBooking);
     return await this.bookingRepository.save(booking);
