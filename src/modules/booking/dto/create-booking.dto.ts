@@ -4,7 +4,6 @@ export class CreateBookingDto {
   create: CreateDTO;
   objectId: string;
 }
-
 class CreateDTO {
   date: Date;
   userId: string;

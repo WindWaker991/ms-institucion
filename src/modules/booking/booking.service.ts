@@ -13,6 +13,7 @@ export class BookingService {
   ) {}
 
   async create(createBookingDto: CreateBookingDto) {
+    console.log(createBookingDto);
     const { objectId, create } = createBookingDto;
     const object = await this.objectService.findOne(objectId);
     const createBooking = {
@@ -32,6 +33,7 @@ export class BookingService {
       where: {
         id,
       },
+      relations: ['object'],
     });
   }
 
