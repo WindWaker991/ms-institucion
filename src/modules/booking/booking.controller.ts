@@ -30,6 +30,11 @@ export class BookingController {
     return this.bookingService.findOne(id);
   }
 
+  @Get('bookings/:id')
+  findBooking(@Param('id') id: string) {
+    return this.bookingService.findBooking(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
     return this.bookingService.update(+id, updateBookingDto);

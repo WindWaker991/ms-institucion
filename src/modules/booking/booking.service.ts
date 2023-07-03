@@ -41,6 +41,15 @@ export class BookingService {
     return `This action updates a #${id} booking`;
   }
 
+  async findBooking(id: string) {
+    return await this.bookingRepository.find({
+      where: {
+        userId: id,
+      },
+      relations: ['object'],
+    });
+  }
+
   async remove(id: string) {
     return await this.bookingRepository.delete({
       id,
